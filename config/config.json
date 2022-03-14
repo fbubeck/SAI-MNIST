@@ -1,0 +1,61 @@
+{
+    "GlobalParameters":{
+        "n_numbers":10000,
+        "min_bias":-2000,
+        "max_bias":2000
+    },
+    "TensorFlow":{
+        "learning_rate":0.01,
+        "n_epochs":10,
+        "n_units":1,
+        "plot":1
+    },
+    "TensorFlow2":{
+        "learning_rate":0.01,
+        "n_epochs":20,
+        "n_units":1,
+        "plot":1
+    },
+    "TensorFlow3":{
+        "learning_rate":0.001,
+        "n_epochs":30,
+        "n_units":1,
+        "plot":1
+    },
+    "PolyRegression":{
+        "degree":1
+    },
+    "PolyRegression2":{
+        "degree":6
+    },
+    "PolyRegression3":{
+        "degree":8
+    },
+    "DecisionTree":{
+        "plot":1,
+        "max_depth": 3
+    },
+    "DecisionTree2":{
+        "plot":1,
+        "max_depth": 6
+    },
+    "DecisionTree3":{
+        "plot":1,
+        "max_depth": 12
+    },
+    "RandomForest":{
+        "n_estimators":100,
+        "random_state":0,
+        "plot":1
+    },
+    "RandomForest2":{
+        "n_estimators":10,
+        "random_state":0,
+        "plot":1
+    },
+    "RandomForest3":{
+        "n_estimators":4,
+        "random_state":0,
+        "plot":1
+    }
+}
