@@ -5,20 +5,20 @@
         "max_bias":2000
     },
     "TensorFlow":{
-        "learning_rate":0.01,
-        "n_epochs":10,
+        "learning_rate":0.1,
+        "n_epochs":5,
         "n_units":1,
         "plot":1
     },
     "TensorFlow2":{
         "learning_rate":0.01,
-        "n_epochs":20,
+        "n_epochs":10,
         "n_units":1,
         "plot":1
     },
     "TensorFlow3":{
         "learning_rate":0.001,
-        "n_epochs":30,
+        "n_epochs":10,
         "n_units":1,
         "plot":1
     },
