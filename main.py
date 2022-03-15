@@ -1,12 +1,9 @@
-from random import random
-from algorithms import TensorFlow
-from algorithms import PolyRegression
-from algorithms import DecisionTree
-from algorithms import RandomForestRegressor
+from algorithms import Algorithm_1
+from algorithms import Algorithm_2
 from data import DataProvider
-from data import Exploration
 import json
 from matplotlib import pyplot as plt
+import pandas as pd
 
 
 def main():
@@ -18,85 +15,110 @@ def main():
         config = json.load(file)
 
     # Get Parameters from config file
-    n_numbers = config["GlobalParameters"]["n_numbers"]
-    min_bias = config["GlobalParameters"]["min_bias"]
-    max_bias = config["GlobalParameters"]["max_bias"]
-
-    tf_learning_rate = config["TensorFlow"]["learning_rate"]
-    tf_n_epochs = config["TensorFlow"]["n_epochs"]
-    tf_units = config["TensorFlow"]["n_units"]
-    tf2_learning_rate = config["TensorFlow2"]["learning_rate"]
-    tf2_n_epochs = config["TensorFlow2"]["n_epochs"]
-    tf2_units = config["TensorFlow2"]["n_units"]
-    tf3_learning_rate = config["TensorFlow3"]["learning_rate"]
-    tf3_n_epochs = config["TensorFlow3"]["n_epochs"]
-    tf3_units = config["TensorFlow3"]["n_units"]
-    
-    lr_degree = config["PolyRegression"]["degree"]
-    lr2_degree = config["PolyRegression2"]["degree"]
-    lr3_degree = config["PolyRegression3"]["degree"]
-
-    dt_max_depth = config["DecisionTree"]["max_depth"]
-    dt2_max_depth = config["DecisionTree2"]["max_depth"]
-    dt3_max_depth = config["DecisionTree3"]["max_depth"]
-
-    rf_n_estimators = config["RandomForest"]["n_estimators"]
-    rf_random_state = config["RandomForest"]["random_state"]
-    rf2_n_estimators = config["RandomForest2"]["n_estimators"]
-    rf2_random_state = config["RandomForest2"]["random_state"]
-    rf3_n_estimators = config["RandomForest3"]["n_estimators"]
-    rf3_random_state = config["RandomForest3"]["random_state"]
+    algo1_a_lr = config["Algorithm 1 - Run A"]["learning_rate"]
+    algo1_a_epochs = config["Algorithm 1 - Run A"]["n_epochs"]
+    algo1_a_id = config["Algorithm 1 - Run A"]["id"]
+    algo1_b_lr = config["Algorithm 1 - Run B"]["learning_rate"]
+    algo1_b_epochs = config["Algorithm 1 - Run B"]["n_epochs"]
+    algo1_b_id = config["Algorithm 1 - Run B"]["id"]
+    algo1_c_lr = config["Algorithm 1 - Run C"]["learning_rate"]
+    algo1_c_epochs = config["Algorithm 1 - Run C"]["n_epochs"]
+    algo1_c_id = config["Algorithm 1 - Run C"]["id"]
+    algo2_a_lr = config["Algorithm 2 - Run A"]["learning_rate"]
+    algo2_a_epochs = config["Algorithm 2 - Run A"]["n_epochs"]
+    algo2_a_id = config["Algorithm 2 - Run A"]["id"]
+    algo2_b_lr = config["Algorithm 2 - Run B"]["learning_rate"]
+    algo2_b_epochs = config["Algorithm 2 - Run B"]["n_epochs"]
+    algo2_b_id = config["Algorithm 2 - Run B"]["id"]
+    algo2_c_lr = config["Algorithm 2 - Run C"]["learning_rate"]
+    algo2_c_epochs = config["Algorithm 2 - Run C"]["n_epochs"]
+    algo2_c_id = config["Algorithm 2 - Run C"]["id"]
 
     # Get Sample Data
     sampleData = DataProvider.DataProvider()
     train_data, test_data = sampleData.get_Data()
 
     # Creating Algorithm Objects
-    algo1_a = TensorFlow.TensorFlow(train_data, test_data, tf_learning_rate, tf_n_epochs, tf_units)
-    algo1_b = TensorFlow.TensorFlow(train_data, test_data, tf2_learning_rate, tf2_n_epochs, tf2_units)
-    algo1_c = TensorFlow.TensorFlow(train_data, test_data, tf3_learning_rate, tf3_n_epochs, tf3_units)
+    algo1_a = Algorithm_1.TensorFlow_CNN(train_data, test_data, algo1_a_lr, algo1_a_epochs, algo1_a_id)
+    algo1_b = Algorithm_1.TensorFlow_CNN(train_data, test_data, algo1_b_lr, algo1_b_epochs, algo1_b_id)
+    algo1_c = Algorithm_1.TensorFlow_CNN(train_data, test_data, algo1_c_lr, algo1_c_epochs, algo1_c_id)
 
-    # Tensorflow
+    algo2_a = Algorithm_2.TensorFlow_ANN(train_data, test_data, algo2_a_lr, algo2_a_epochs, algo2_a_id)
+    algo2_b = Algorithm_2.TensorFlow_ANN(train_data, test_data, algo2_b_lr, algo2_b_epochs, algo2_b_id)
+    algo2_c = Algorithm_2.TensorFlow_ANN(train_data, test_data, algo2_c_lr, algo2_c_epochs, algo2_c_id)
+
+    # CNN
     algo1_a_trainingDuration, algo1_a_trainingError = algo1_a.train()
     algo1_a_testDuration, algo1_a_testError = algo1_a.test()
-    #algo1_a.plot()
+    algo1_a.plot()
     algo1_b_trainingDuration, algo1_b_trainingError = algo1_b.train()
     algo1_b_testDuration, algo1_b_testError = algo1_b.test()
+    algo1_b.plot()
     algo1_c_trainingDuration, algo1_c_trainingError = algo1_c.train()
     algo1_c_testDuration, algo1_c_testError = algo1_c.test()
+    algo1_c.plot()
+
+    # ANN
+    algo2_a_trainingDuration, algo2_a_trainingError = algo2_a.train()
+    algo2_a_testDuration, algo2_a_testError = algo2_a.test()
+    algo2_a.plot()
+    algo2_b_trainingDuration, algo2_b_trainingError = algo2_b.train()
+    algo2_b_testDuration, algo2_b_testError = algo2_b.test()
+    algo2_b.plot()
+    algo2_c_trainingDuration, algo2_c_trainingError = algo2_c.train()
+    algo2_c_testDuration, algo2_c_testError = algo2_c.test()
+    algo2_c.plot()
 
     # Plots
-    xs_test = test_data[0]
-    ys_test = test_data[1]
+    px = 1 / plt.rcParams['figure.dpi']
 
-    px = 1/plt.rcParams['figure.dpi']
+    training1 = {'error': [algo1_a_trainingError, algo1_b_trainingError, algo1_c_trainingError],
+                 'duration': [algo1_a_trainingDuration, algo1_b_trainingDuration, algo1_c_trainingDuration]
+                 }
 
-    algo1_training_x = [algo1_a_trainingError, algo1_b_trainingError, algo1_c_trainingError]
-    algo1_training_y = [algo1_a_trainingDuration, algo1_b_trainingDuration, algo1_c_trainingDuration]
-    algo1_test_x = [algo1_a_testError, algo1_b_testError, algo1_c_testError]
-    algo1_test_y = [algo1_a_testDuration, algo1_b_testDuration, algo1_c_testDuration,]
+    training2 = {'error': [algo2_a_trainingError, algo2_b_trainingError, algo2_c_trainingError],
+                 'duration': [algo2_a_trainingDuration, algo2_b_trainingDuration, algo2_c_trainingDuration]
+                 }
 
+    inference1 = {'error': [algo1_a_testError, algo1_b_testError, algo1_c_testError],
+                  'duration': [algo1_a_testDuration, algo1_b_testDuration, algo1_c_testDuration]
+                  }
 
-    fig = plt.figure(figsize=(1200*px, 800*px))
+    inference2 = {'error': [algo2_a_testError, algo2_b_testError, algo2_c_testError],
+                  'duration': [algo2_a_testDuration, algo2_b_testDuration, algo2_c_testDuration]
+                  }
+
+    data_training1 = pd.DataFrame(training1)
+    data_training2 = pd.DataFrame(training2)
+    data_inference1 = pd.DataFrame(inference1)
+    data_inference2 = pd.DataFrame(inference2)
+    data_training1.sort_values(by=['duration'], inplace=True)
+    data_training2.sort_values(by=['duration'], inplace=True)
+    data_inference1.sort_values(by=['duration'], inplace=True)
+    data_inference2.sort_values(by=['duration'], inplace=True)
+
+    fig = plt.figure(figsize=(1200 * px, 800 * px))
     ax1 = fig.add_subplot(121)
     ax2 = fig.add_subplot(122)
-    ax1.set_ylabel('Duration [in seconds; log scale]')
-    ax1.set_xlabel('Model-Performance (Error)')
-    ax2.set_ylabel('Duration [in seconds; log scale]')
-    ax2.set_xlabel('Model-Performance (Error)')
+    ax1.set_xlabel('Duration [in seconds]')
+    ax1.set_ylabel('Model-Performance (Accuracy)')
+    ax2.set_xlabel('Duration [in seconds]')
+    ax2.set_ylabel('Model-Performance (Accuracy)')
     fig.suptitle('Efficiency of different ML-Algorithms and Parametersets')
-    ax1.plot(algo1_training_x, algo1_training_y, '-o', c='blue', alpha=0.6)
-    ax2.plot(algo1_test_x, algo1_test_y, '-o', c='blue', alpha=0.6)
+    ax1.plot(data_training1["duration"], data_training1["error"], '-o', c='blue', alpha=0.6)
+    ax1.plot(data_training2["duration"], data_training2["error"], '-o', c='green', alpha=0.6)
+    ax2.plot(data_inference1["duration"], data_inference1["error"], '-o', c='blue', alpha=0.6)
+    ax2.plot(data_inference2["duration"], data_inference2["error"], '-o', c='green', alpha=0.6)
     ax1.title.set_text('Training')
     ax2.title.set_text('Inference')
-    plt.legend(["TensorFlow Neural Network (3 different Parametersets)"], loc='lower center', ncol=4, bbox_transform=fig.transFigure, bbox_to_anchor=(0.5,0))
-    ax1.set_yscale('log')
-    ax2.set_yscale('log')
+    plt.legend(["TensorFlow CNN ", "TensorFlow ANN"], loc='lower center', ncol=4, bbox_transform=fig.transFigure,
+               bbox_to_anchor=(0.5, 0))
+    # ax1.set_yscale('log')
+    # ax2.set_yscale('log')
     plt.savefig('plots/Algorithms_Evaluation.png')
-    #plt.show()
+    # plt.show()
     print("Evaluation Plot saved...")
     print("")
-
 
 
 if __name__ == "__main__":
