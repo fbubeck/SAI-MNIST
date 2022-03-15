@@ -1,15 +1,10 @@
 import numpy as np
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
-from tensorflow import keras
 from keras.layers import Dense, Flatten, MaxPool2D, Conv2D, Dropout
 from keras.models import Sequential
-from keras.utils.np_utils import to_categorical
 from matplotlib import pyplot as plt
 from time import time
-from keras import backend as k
-import datetime
-from sklearn.metrics import mean_squared_error
 
 
 class TensorFlow_CNN:

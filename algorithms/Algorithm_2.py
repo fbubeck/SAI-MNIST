@@ -1,6 +1,4 @@
 import numpy as np
-import pandas as pd
-import tensorflow as tf
 from sklearn.model_selection import train_test_split
 from tensorflow import keras
 from keras.layers import Dense, Flatten
@@ -8,8 +6,6 @@ from keras.models import Sequential
 from keras.utils.np_utils import to_categorical
 from matplotlib import pyplot as plt
 from time import time
-import datetime
-from sklearn.metrics import mean_squared_error
 
 
 class TensorFlow_ANN:
