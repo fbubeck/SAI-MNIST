@@ -5,43 +5,53 @@ from keras.layers import Dense, Flatten, MaxPool2D, Conv2D, Dropout
 from keras.models import Sequential
 from matplotlib import pyplot as plt
 from time import time
+from keras.utils.np_utils import to_categorical
 
 
 class TensorFlow_CNN:
-    def __init__(self, train_data, test_data, learning_rate, n_epochs, id):
+    def __init__(self, train_data, test_data, learning_rate, n_epochs, id, opt):
         self.history = None
         self.train_data = train_data
         self.test_data = test_data
         self.learning_rate = learning_rate
         self.n_epochs = n_epochs
         self.id = id
+        self.opt = opt
         self.model = 0
 
     def train(self):
         # Training Data
         xs_train, ys_train = self.train_data
 
+        # Convert y_train into one-hot format
+        temp = []
+        for i in range(len(ys_train)):
+            temp.append(to_categorical(ys_train[i], num_classes=10))
+        ys_train = np.array(temp)
+
+        xs_train, xs_val, ys_train, ys_val = train_test_split(xs_train, ys_train, test_size=0.25, random_state=8)
+
         # normalize pixel values
         xs_train = xs_train / 255
-
-        xs_train = xs_train.reshape((xs_train.shape + (1,)))
-
-        xs_train, xs_val, ys_train, ys_val = train_test_split(xs_train, ys_train, test_size=0.25, random_state=7)
+        xs_val = xs_val / 255
 
         # define model architecture
         self.model = Sequential()
         self.model.add(Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1)))
         self.model.add(MaxPool2D((2, 2)))
         self.model.add(Flatten())
-        self.model.add(Dense(150, activation='relu'))
+        self.model.add(Dense(100, activation='relu'))
         self.model.add(Dropout(0.5))
         self.model.add(Dense(10, activation='softmax'))
 
         # Define Optimizer
-        opt = tf.keras.optimizers.SGD(learning_rate=self.learning_rate)
+        if self.opt == "SGD":
+            opt = tf.keras.optimizers.SGD(learning_rate=self.learning_rate)
+        else:
+            opt = tf.keras.optimizers.Adam(learning_rate=self.learning_rate)
 
         # define loss and optimizer
-        self.model.compile(optimizer=opt, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+        self.model.compile(optimizer=opt, loss='categorical_crossentropy', metrics=['accuracy'])
 
         # Modeling
         start_training = time()
@@ -74,10 +84,14 @@ class TensorFlow_CNN:
         # Test Data
         xs_test, ys_test = self.test_data
 
-        xs_test = xs_test.reshape((xs_test.shape + (1,)))
-
         # normalize pixel values
         xs_test = xs_test / 255
+
+        # Convert y_test into one-hot format
+        temp = []
+        for i in range(len(ys_test)):
+            temp.append(to_categorical(ys_test[i], num_classes=10))
+        ys_test = np.array(temp)
 
         # Predict Data
         start_test = time()

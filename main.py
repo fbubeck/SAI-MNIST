@@ -18,34 +18,40 @@ def main():
     algo1_a_lr = config["Algorithm 1 - Run A"]["learning_rate"]
     algo1_a_epochs = config["Algorithm 1 - Run A"]["n_epochs"]
     algo1_a_id = config["Algorithm 1 - Run A"]["id"]
+    algo1_a_opt = config["Algorithm 1 - Run A"]["opt"]
     algo1_b_lr = config["Algorithm 1 - Run B"]["learning_rate"]
     algo1_b_epochs = config["Algorithm 1 - Run B"]["n_epochs"]
     algo1_b_id = config["Algorithm 1 - Run B"]["id"]
+    algo1_b_opt = config["Algorithm 1 - Run B"]["opt"]
     algo1_c_lr = config["Algorithm 1 - Run C"]["learning_rate"]
     algo1_c_epochs = config["Algorithm 1 - Run C"]["n_epochs"]
     algo1_c_id = config["Algorithm 1 - Run C"]["id"]
+    algo1_c_opt = config["Algorithm 1 - Run C"]["opt"]
     algo2_a_lr = config["Algorithm 2 - Run A"]["learning_rate"]
     algo2_a_epochs = config["Algorithm 2 - Run A"]["n_epochs"]
     algo2_a_id = config["Algorithm 2 - Run A"]["id"]
+    algo2_a_opt = config["Algorithm 2 - Run A"]["opt"]
     algo2_b_lr = config["Algorithm 2 - Run B"]["learning_rate"]
     algo2_b_epochs = config["Algorithm 2 - Run B"]["n_epochs"]
     algo2_b_id = config["Algorithm 2 - Run B"]["id"]
+    algo2_b_opt = config["Algorithm 2 - Run B"]["opt"]
     algo2_c_lr = config["Algorithm 2 - Run C"]["learning_rate"]
     algo2_c_epochs = config["Algorithm 2 - Run C"]["n_epochs"]
     algo2_c_id = config["Algorithm 2 - Run C"]["id"]
+    algo2_c_opt = config["Algorithm 2 - Run C"]["opt"]
 
     # Get Sample Data
     sampleData = DataProvider.DataProvider()
     train_data, test_data = sampleData.get_Data()
 
     # Creating Algorithm Objects
-    algo1_a = Algorithm_1.TensorFlow_CNN(train_data, test_data, algo1_a_lr, algo1_a_epochs, algo1_a_id)
-    algo1_b = Algorithm_1.TensorFlow_CNN(train_data, test_data, algo1_b_lr, algo1_b_epochs, algo1_b_id)
-    algo1_c = Algorithm_1.TensorFlow_CNN(train_data, test_data, algo1_c_lr, algo1_c_epochs, algo1_c_id)
+    algo1_a = Algorithm_1.TensorFlow_CNN(train_data, test_data, algo1_a_lr, algo1_a_epochs, algo1_a_id, algo1_a_opt)
+    algo1_b = Algorithm_1.TensorFlow_CNN(train_data, test_data, algo1_b_lr, algo1_b_epochs, algo1_b_id, algo1_b_opt)
+    algo1_c = Algorithm_1.TensorFlow_CNN(train_data, test_data, algo1_c_lr, algo1_c_epochs, algo1_c_id, algo1_c_opt)
 
-    algo2_a = Algorithm_2.TensorFlow_ANN(train_data, test_data, algo2_a_lr, algo2_a_epochs, algo2_a_id)
-    algo2_b = Algorithm_2.TensorFlow_ANN(train_data, test_data, algo2_b_lr, algo2_b_epochs, algo2_b_id)
-    algo2_c = Algorithm_2.TensorFlow_ANN(train_data, test_data, algo2_c_lr, algo2_c_epochs, algo2_c_id)
+    algo2_a = Algorithm_2.TensorFlow_ANN(train_data, test_data, algo2_a_lr, algo2_a_epochs, algo2_a_id, algo2_a_opt)
+    algo2_b = Algorithm_2.TensorFlow_ANN(train_data, test_data, algo2_b_lr, algo2_b_epochs, algo2_b_id, algo2_b_opt)
+    algo2_c = Algorithm_2.TensorFlow_ANN(train_data, test_data, algo2_c_lr, algo2_c_epochs, algo2_c_id, algo2_c_opt)
 
     # CNN
     algo1_a_trainingDuration, algo1_a_trainingError = algo1_a.train()
@@ -72,20 +78,24 @@ def main():
     # Plots
     px = 1 / plt.rcParams['figure.dpi']
 
-    training1 = {'error': [algo1_a_trainingError, algo1_b_trainingError, algo1_c_trainingError],
-                 'duration': [algo1_a_trainingDuration, algo1_b_trainingDuration, algo1_c_trainingDuration]
+    training1 = {'error': [algo1_a_testError, algo1_b_testError, algo1_c_testError],
+                 'duration': [algo1_a_trainingDuration, algo1_b_trainingDuration, algo1_c_trainingDuration],
+                 'Run': ["A", "B", "C"]
                  }
 
-    training2 = {'error': [algo2_a_trainingError, algo2_b_trainingError, algo2_c_trainingError],
-                 'duration': [algo2_a_trainingDuration, algo2_b_trainingDuration, algo2_c_trainingDuration]
+    training2 = {'error': [algo2_a_testError, algo2_b_testError, algo2_c_testError],
+                 'duration': [algo2_a_trainingDuration, algo2_b_trainingDuration, algo2_c_trainingDuration],
+                 'Run': ["A", "B", "C"]
                  }
 
     inference1 = {'error': [algo1_a_testError, algo1_b_testError, algo1_c_testError],
-                  'duration': [algo1_a_testDuration, algo1_b_testDuration, algo1_c_testDuration]
+                  'duration': [algo1_a_testDuration, algo1_b_testDuration, algo1_c_testDuration],
+                  'Run': ["A", "B", "C"]
                   }
 
     inference2 = {'error': [algo2_a_testError, algo2_b_testError, algo2_c_testError],
-                  'duration': [algo2_a_testDuration, algo2_b_testDuration, algo2_c_testDuration]
+                  'duration': [algo2_a_testDuration, algo2_b_testDuration, algo2_c_testDuration],
+                  'Run': ["A", "B", "C"]
                   }
 
     data_training1 = pd.DataFrame(training1)
@@ -115,6 +125,27 @@ def main():
                bbox_to_anchor=(0.5, 0))
     # ax1.set_yscale('log')
     # ax2.set_yscale('log')
+    for i in range(3):
+        ax1.annotate(data_training1["Run"][i], xy=(data_training1["duration"][i], data_training1["error"][i]),
+                     color='black',
+                     fontsize=10, weight='heavy',
+                     horizontalalignment='left',
+                     verticalalignment='center')
+        ax1.annotate(data_training2["Run"][i], xy=(data_training2["duration"][i], data_training2["error"][i]),
+                     color='black',
+                     fontsize=10, weight='heavy',
+                     horizontalalignment='left',
+                     verticalalignment='center')
+        ax2.annotate(data_inference1["Run"][i], xy=(data_inference1["duration"][i], data_inference1["error"][i]),
+                     color='black',
+                     fontsize=10, weight='heavy',
+                     horizontalalignment='left',
+                     verticalalignment='center')
+        ax2.annotate(data_inference2["Run"][i], xy=(data_inference2["duration"][i], data_inference2["error"][i]),
+                     color='black',
+                     fontsize=10, weight='heavy',
+                     horizontalalignment='left',
+                     verticalalignment='center')
     plt.savefig('plots/Algorithms_Evaluation.png')
     # plt.show()
     print("Evaluation Plot saved...")

@@ -9,13 +9,14 @@ from time import time
 
 
 class TensorFlow_ANN:
-    def __init__(self, train_data, test_data, learning_rate, n_epochs, id):
+    def __init__(self, train_data, test_data, learning_rate, n_epochs, id, opt):
         self.history = None
         self.train_data = train_data
         self.test_data = test_data
         self.learning_rate = learning_rate
         self.n_epochs = n_epochs
         self.id = id
+        self.opt = opt
         self.model = 0
 
     def train(self):
@@ -42,7 +43,10 @@ class TensorFlow_ANN:
         self.model.add(Dense(10, activation='softmax'))
 
         # Define Optimizer
-        opt = keras.optimizers.Adam(learning_rate=self.learning_rate)
+        if self.opt == "SGD":
+            opt = keras.optimizers.SGD(learning_rate=self.learning_rate)
+        else:
+            opt = keras.optimizers.Adam(learning_rate=self.learning_rate)
 
         # define loss and optimizer
         self.model.compile(optimizer=opt, loss='categorical_crossentropy', metrics=['accuracy'])
