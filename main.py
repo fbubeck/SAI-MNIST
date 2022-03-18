@@ -170,9 +170,11 @@ def main():
     data_training1.sort_values(by=['duration'], inplace=True)
     data_training2.sort_values(by=['duration'], inplace=True)
     data_training3.sort_values(by=['duration'], inplace=True)
+    data_training4.sort_values(by=['duration'], inplace=True)
     data_inference1.sort_values(by=['duration'], inplace=True)
     data_inference2.sort_values(by=['duration'], inplace=True)
     data_inference3.sort_values(by=['duration'], inplace=True)
+    data_inference4.sort_values(by=['duration'], inplace=True)
 
     fig = plt.figure(figsize=(1200 * px, 800 * px))
     ax1 = fig.add_subplot(121)
