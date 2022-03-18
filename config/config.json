@@ -36,30 +36,30 @@
         "id":2.3
     },
     "Algorithm 3 - Run A":{
-        "plot":1,
-        "max_depth": 3
+        "penalty":"l2",
+        "solver":"sag",
+        "max_iter": 10,
+        "id":3.1
     },
     "Algorithm 3 - Run B":{
-        "plot":1,
-        "max_depth": 6
+        "penalty":"l2",
+        "solver":"sag",
+        "max_iter": 30,
+        "id":3.2
     },
     "Algorithm 3 - Run C":{
-        "plot":1,
-        "max_depth": 12
+        "penalty":"l2",
+        "solver":"lbfgs",
+        "max_iter": 200,
+        "id":3.3
     },
     "Algorithm 4 - Run A":{
-        "n_estimators":100,
-        "random_state":0,
-        "plot":1
+        "n_estimators":100
     },
     "Algorithm 4 - Run B":{
-        "n_estimators":10,
-        "random_state":0,
-        "plot":1
+        "n_estimators":200
     },
     "Algorithm 4 - Run C":{
-        "n_estimators":4,
-        "random_state":0,
-        "plot":1
+        "n_estimators":50
     }
 }

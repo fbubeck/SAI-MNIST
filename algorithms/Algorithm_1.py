@@ -6,6 +6,7 @@ from keras.models import Sequential
 from matplotlib import pyplot as plt
 from time import time
 from keras.utils.np_utils import to_categorical
+from model_profiler import model_profiler
 
 
 class TensorFlow_CNN:
@@ -77,6 +78,11 @@ class TensorFlow_CNN:
         print(f'Duration Training: {duration_training} seconds')
         print('Accuracy Training: ', error)
         print("Number of Parameter: ", n_params)
+
+        Batch_size = 128
+        profile = model_profiler(self.model, Batch_size)
+
+        print(profile)
 
         return duration_training, error
 
