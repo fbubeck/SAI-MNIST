@@ -46,9 +46,9 @@ class TensorFlow_CNN:
 
         # Define Optimizer
         if self.opt == "SGD":
-            opt = tf.keras.optimizers.SGD(learning_rate=self.learning_rate)
+            opt = tf.keras.optimizers.SGD(lr=self.learning_rate)
         else:
-            opt = tf.keras.optimizers.Adam(learning_rate=self.learning_rate)
+            opt = tf.keras.optimizers.Adam(lr=self.learning_rate)
 
         # define loss and optimizer
         self.model.compile(optimizer=opt, loss='categorical_crossentropy', metrics=['accuracy'])
