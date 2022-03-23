@@ -5,7 +5,6 @@ from sklearn.model_selection import train_test_split
 from keras.utils.np_utils import to_categorical
 from matplotlib import pyplot as plt
 from time import time
-from model_profiler import model_profiler
 
 
 class LogisticRegressionClassifier:

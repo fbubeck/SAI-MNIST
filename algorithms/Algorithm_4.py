@@ -1,7 +1,6 @@
 from sklearn.ensemble import RandomForestClassifier
 from matplotlib import pyplot as plt
 from time import time
-from model_profiler import model_profiler
 
 
 class RandomForest:
