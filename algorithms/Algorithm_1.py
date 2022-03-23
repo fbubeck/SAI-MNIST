@@ -35,6 +35,8 @@ class TensorFlow_CNN:
         xs_train = xs_train / 255
         xs_val = xs_val / 255
 
+        print(xs_train.shape)
+
         # define model architecture
         self.model = Sequential()
         self.model.add(Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1)))

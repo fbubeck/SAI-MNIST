@@ -82,16 +82,16 @@ def main():
     algo4_b = Algorithm_4.RandomForest(train_data, test_data, algo4_b_n_estimators)
     algo4_c = Algorithm_4.RandomForest(train_data, test_data, algo4_c_n_estimators)
 
-    # # CNN
-    # algo1_a_trainingDuration, algo1_a_trainingError = algo1_a.train()
-    # algo1_a_testDuration, algo1_a_testError = algo1_a.test()
-    # algo1_a.plot()
-    # algo1_b_trainingDuration, algo1_b_trainingError = algo1_b.train()
-    # algo1_b_testDuration, algo1_b_testError = algo1_b.test()
-    # algo1_b.plot()
-    # algo1_c_trainingDuration, algo1_c_trainingError = algo1_c.train()
-    # algo1_c_testDuration, algo1_c_testError = algo1_c.test()
-    # algo1_c.plot()
+    # CNN
+    algo1_a_trainingDuration, algo1_a_trainingError = algo1_a.train()
+    algo1_a_testDuration, algo1_a_testError = algo1_a.test()
+    algo1_a.plot()
+    algo1_b_trainingDuration, algo1_b_trainingError = algo1_b.train()
+    algo1_b_testDuration, algo1_b_testError = algo1_b.test()
+    algo1_b.plot()
+    algo1_c_trainingDuration, algo1_c_trainingError = algo1_c.train()
+    algo1_c_testDuration, algo1_c_testError = algo1_c.test()
+    algo1_c.plot()
 
     # ANN
     algo2_a_trainingDuration, algo2_a_trainingError = algo2_a.train()
