@@ -1,5 +1,6 @@
 import sys, os
-sys.path.append(os.path.realpath('../'))
+
+sys.path.append(os.path.realpath('../SAI-MNIST'))
 
 from algorithms import Algorithm_1, Algorithm_2, Algorithm_3, Algorithm_4
 from data import DataProvider
