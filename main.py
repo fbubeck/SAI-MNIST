@@ -1,5 +1,7 @@
+import sys, os
+sys.path.append(os.path.realpath('../'))
+
 from algorithms import Algorithm_1, Algorithm_2, Algorithm_3, Algorithm_4
-from algorithms.Algorithm_1 import TensorFlow_CNN
 from data import DataProvider
 import json
 from matplotlib import pyplot as plt
@@ -68,9 +70,12 @@ def main():
     algo2_b = Algorithm_2.TensorFlow_ANN(train_data, test_data, algo2_b_lr, algo2_b_epochs, algo2_b_id, algo2_b_opt)
     algo2_c = Algorithm_2.TensorFlow_ANN(train_data, test_data, algo2_c_lr, algo2_c_epochs, algo2_c_id, algo2_c_opt)
 
-    algo3_a = Algorithm_3.LogisticRegressionClassifier(train_data, test_data, algo3_a_penalty, algo3_a_solver, algo3_a_id, algo3_a_max_iter)
-    algo3_b = Algorithm_3.LogisticRegressionClassifier(train_data, test_data, algo3_b_penalty, algo3_b_solver, algo3_b_id, algo3_b_max_iter)
-    algo3_c = Algorithm_3.LogisticRegressionClassifier(train_data, test_data, algo3_c_penalty, algo3_c_solver, algo3_c_id, algo3_c_max_iter)
+    algo3_a = Algorithm_3.LogisticRegressionClassifier(train_data, test_data, algo3_a_penalty, algo3_a_solver,
+                                                       algo3_a_id, algo3_a_max_iter)
+    algo3_b = Algorithm_3.LogisticRegressionClassifier(train_data, test_data, algo3_b_penalty, algo3_b_solver,
+                                                       algo3_b_id, algo3_b_max_iter)
+    algo3_c = Algorithm_3.LogisticRegressionClassifier(train_data, test_data, algo3_c_penalty, algo3_c_solver,
+                                                       algo3_c_id, algo3_c_max_iter)
 
     algo4_a = Algorithm_4.RandomForest(train_data, test_data, algo4_a_n_estimators)
     algo4_b = Algorithm_4.RandomForest(train_data, test_data, algo4_b_n_estimators)
@@ -192,7 +197,8 @@ def main():
     ax2.plot(data_inference4["duration"], data_inference4["error"], '-o', c='orange', alpha=0.6)
     ax1.title.set_text('Training')
     ax2.title.set_text('Inference')
-    plt.legend(["TensorFlow CNN ", "TensorFlow ANN", "Logistic Regression", "Random Forest"], loc='lower center', ncol=4, bbox_transform=fig.transFigure,
+    plt.legend(["TensorFlow CNN ", "TensorFlow ANN", "Logistic Regression", "Random Forest"], loc='lower center',
+               ncol=4, bbox_transform=fig.transFigure,
                bbox_to_anchor=(0.5, 0))
     # ax1.set_yscale('log')
     # ax2.set_yscale('log')
