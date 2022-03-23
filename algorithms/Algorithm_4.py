@@ -22,7 +22,7 @@ class RandomForest:
         xs_train = xs_train / 255
 
         # Modeling
-        self.model = RandomForestClassifier(n_estimators=200)
+        self.model = RandomForestClassifier(n_estimators=self.n_estimators)
         start_training = time()
         self.model.fit(xs_train, ys_train)
         end_training = time()
@@ -36,7 +36,7 @@ class RandomForest:
         error = round(error, 2)
 
         # Summary
-        print('------ Logistic Regression ------')
+        print('------ Random Forest ------')
         print(f'Duration Training: {duration_training} seconds')
         print('Accuracy Training: ', error)
 

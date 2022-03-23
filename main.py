@@ -1,7 +1,5 @@
-from algorithms import Algorithm_1
-from algorithms import Algorithm_2
-from algorithms import Algorithm_3
-from algorithms import Algorithm_4
+from algorithms import Algorithm_1, Algorithm_2, Algorithm_3, Algorithm_4
+from algorithms.Algorithm_1 import TensorFlow_CNN
 from data import DataProvider
 import json
 from matplotlib import pyplot as plt

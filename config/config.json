@@ -54,12 +54,12 @@
         "id":3.3
     },
     "Algorithm 4 - Run A":{
-        "n_estimators":100
+        "n_estimators":50
     },
     "Algorithm 4 - Run B":{
-        "n_estimators":200
+        "n_estimators":100
     },
     "Algorithm 4 - Run C":{
-        "n_estimators":50
+        "n_estimators":20
     }
 }
