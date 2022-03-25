@@ -6,6 +6,7 @@ from keras.models import Sequential
 from matplotlib import pyplot as plt
 from time import time
 from keras.utils.np_utils import to_categorical
+from pypapi import events, papi_high as high
 
 class TensorFlow_CNN:
     def __init__(self, train_data, test_data, learning_rate, n_epochs, id, opt):
@@ -56,8 +57,10 @@ class TensorFlow_CNN:
 
         # Modeling
         start_training = time()
+        high.start_counters([events.PAPI_FP_OPS, ])
         self.history = self.model.fit(xs_train, ys_train, epochs=self.n_epochs, validation_data=(xs_val, ys_val),
                                       batch_size=128, verbose=1)
+        x = high.stop_counters()
         end_training = time()
 
         # Time
@@ -78,6 +81,7 @@ class TensorFlow_CNN:
         print(f'Duration Training: {duration_training} seconds')
         print('Accuracy Training: ', error)
         print("Number of Parameter: ", n_params)
+        print("FLOPS: ", x)
 
         return duration_training, error
 
