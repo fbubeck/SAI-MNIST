@@ -57,14 +57,14 @@ class TensorFlow_CNN:
 
         # Modeling
         start_training = time()
-        papi_high.flops()
+        high.flops()
         self.history = self.model.fit(xs_train, ys_train, epochs=self.n_epochs, validation_data=(xs_val, ys_val),
                                       batch_size=128, verbose=1)
-        result = papi_high.flops()  # -> Flops(rtime, ptime, flpops, mflops)
+        result = high.flops()  # -> Flops(rtime, ptime, flpops, mflops)
         print(result.mflops)
 
         # Stop counters
-        papi_high.stop_counters()  # -> []
+        high.stop_counters()  # -> []
         end_training = time()
 
         # Time
