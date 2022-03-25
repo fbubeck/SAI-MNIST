@@ -57,14 +57,10 @@ class TensorFlow_CNN:
 
         # Modeling
         start_training = time()
-        high.flops()
+        high.start_counters([events.PAPI_DP_OPS])
         self.history = self.model.fit(xs_train, ys_train, epochs=self.n_epochs, validation_data=(xs_val, ys_val),
                                       batch_size=128, verbose=1)
-        result = high.flops()  # -> Flops(rtime, ptime, flpops, mflops)
-        print(result.mflops)
-
-        # Stop counters
-        high.stop_counters()  # -> []
+        x = high.stop_counters()
         end_training = time()
 
         # Time
@@ -85,6 +81,7 @@ class TensorFlow_CNN:
         print(f'Duration Training: {duration_training} seconds')
         print('Accuracy Training: ', error)
         print("Number of Parameter: ", n_params)
+        print("FLOPS: ", x)
 
         return duration_training, error
 
