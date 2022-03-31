@@ -180,14 +180,13 @@ def main():
     data_inference3.sort_values(by=['duration'], inplace=True)
     data_inference4.sort_values(by=['duration'], inplace=True)
 
-    fig = plt.figure(figsize=(1200 * px, 800 * px))
+    fig = plt.figure(figsize=(900 * px, 400 * px))
     ax1 = fig.add_subplot(121)
     ax2 = fig.add_subplot(122)
-    ax1.set_xlabel('Duration [in seconds]')
-    ax1.set_ylabel('Model-Performance (Accuracy)')
-    ax2.set_xlabel('Duration [in seconds]')
-    ax2.set_ylabel('Model-Performance (Accuracy)')
-    fig.suptitle('Efficiency of different ML-Algorithms and Parametersets')
+    ax1.set_xlabel('Duration [in seconds]', fontsize=10)
+    ax1.set_ylabel('Model-Performance (Accuracy)', fontsize=10)
+    ax2.set_xlabel('Duration [in seconds]', fontsize=10)
+    ax2.set_ylabel('Model-Performance (Accuracy)', fontsize=10)
     ax1.plot(data_training1["duration"], data_training1["error"], '-o', c='blue', alpha=0.6)
     ax1.plot(data_training2["duration"], data_training2["error"], '-o', c='green', alpha=0.6)
     ax1.plot(data_training3["duration"], data_training3["error"], '-o', c='red', alpha=0.6)
@@ -198,9 +197,8 @@ def main():
     ax2.plot(data_inference4["duration"], data_inference4["error"], '-o', c='orange', alpha=0.6)
     ax1.title.set_text('Training')
     ax2.title.set_text('Inference')
-    plt.legend(["TensorFlow CNN ", "TensorFlow ANN", "Logistic Regression", "Random Forest"], loc='lower center',
-               ncol=4, bbox_transform=fig.transFigure,
-               bbox_to_anchor=(0.5, 0))
+    plt.legend(["CNN", "ANN", "Logistic Regression", "Random Forest"],
+               fontsize=9, loc='lower right', ncol=1, bbox_transform=fig.transFigure)
     # ax1.set_yscale('log')
     # ax2.set_yscale('log')
     for i in range(3):
@@ -244,7 +242,7 @@ def main():
                      fontsize=10, weight='heavy',
                      horizontalalignment='left',
                      verticalalignment='center')
-    plt.savefig('plots/Algorithms_Evaluation.png')
+    plt.savefig('plots/Algorithms_Evaluation.png', dpi=300)
     # plt.show()
     print("Evaluation Plot saved...")
     print("")
