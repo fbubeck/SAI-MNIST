@@ -154,6 +154,8 @@ def main():
     ax1.set_ylabel('Duration [in seconds]', fontsize=10)
     ax2.set_xlabel('Model-Performance (Accuracy in %)', fontsize=10)
     ax2.set_ylabel('Duration [in seconds]', fontsize=10)
+    ax1.set_xscale('log')
+    ax2.set_xscale('log')
     ax1.plot(ConvNN_test_df["accuracy"], ConvNN_training_df["duration"], '-o', c='blue', alpha=0.6, markersize=4)
     ax2.plot(ConvNN_test_df["accuracy"], ConvNN_test_df["duration"], '-o', c='blue', alpha=0.6, markersize=4)
     ax1.plot(NeuralNetwork_test_df["accuracy"], NeuralNetwork_training_df["duration"], '-o', c='green', alpha=0.6, markersize=4)
@@ -166,12 +168,12 @@ def main():
     ax2.title.set_text('Inference')
     plt.legend(["Convolutional NN", "Neural Network", "Random Forest", "Logistic Regression"],
                loc='lower center', ncol=4, bbox_transform=fig.transFigure, bbox_to_anchor=(0.5, 0))
-    plt.savefig('plots/Algorithms_Evaluation.png', dpi=300)
+    plt.savefig('plots/Algorithms_Evaluation.png', dpi=600)
     plt.clf()
     print("Evaluation Plot saved...")
     print("")
 
-    plt.figure(figsize=(900 * px, 400 * px))
+    plt.figure(figsize=(600 * px, 400 * px))
     plt.plot(ConvNN_training_df["accuracy"], ConvNN_training_df["parameter"], '-o', c='blue', alpha=0.6)
     plt.plot(NeuralNetwork_training_df["accuracy"], NeuralNetwork_training_df["parameter"], '-o', c='green', alpha=0.6)
     plt.xlabel('Accuracy [in %]', fontsize=10)

@@ -34,7 +34,9 @@ class LogisticRegressionClassifier:
                                         max_iter=self.max_iter,
                                         C=1,
                                         tol=0.01,
-                                        verbose=0)
+                                        verbose=0,
+                                        n_jobs=1
+                                        )
         start_training = time()
         self.model.fit(xs_train, ys_train)
         end_training = time()

@@ -21,7 +21,7 @@ class RandomForest:
         xs_train = xs_train / 255
 
         # Modeling
-        self.model = RandomForestClassifier(n_estimators=self.n_estimators)
+        self.model = RandomForestClassifier(n_estimators=self.n_estimators,  n_jobs=1)
         start_training = time()
         self.model.fit(xs_train, ys_train)
         end_training = time()
