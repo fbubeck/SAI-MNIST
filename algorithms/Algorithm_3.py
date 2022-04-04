@@ -8,13 +8,12 @@ from time import time
 
 
 class LogisticRegressionClassifier:
-    def __init__(self, train_data, test_data, penalty, solver, id, max_iter):
+    def __init__(self, train_data, test_data, penalty, solver, max_iter):
         self.history = None
         self.train_data = train_data
         self.test_data = test_data
         self.penalty = penalty
         self.solver = solver
-        self.id = id
         self.max_iter = max_iter
         self.model = None
 
@@ -35,21 +34,23 @@ class LogisticRegressionClassifier:
                                         max_iter=self.max_iter,
                                         C=1,
                                         tol=0.01,
-                                        verbose=1)
+                                        verbose=0)
         start_training = time()
         self.model.fit(xs_train, ys_train)
         end_training = time()
 
         # Time
         duration_training = end_training - start_training
-        duration_training = round(duration_training, 2)
+        duration_training = round(duration_training, 4)
 
         # Prediction for Training mse
         error = self.model.score(xs_train, ys_train)
-        error = round(error, 2)
+        error *= 100
+        error = round(error, 4)
 
         # Summary
         print('------ Logistic Regression ------')
+        print("Number of Iterations: ", self.max_iter)
         print(f'Duration Training: {duration_training} seconds')
         print('Accuracy Training: ', error)
 
@@ -67,16 +68,17 @@ class LogisticRegressionClassifier:
         # Predict Data
         start_test = time()
         error = self.model.score(xs_test, ys_test)
-        error = round(error, 2)
+        error *= 100
+        error = round(error, 4)
         end_test = time()
 
         # Time
         duration_test = end_test - start_test
-        duration_test = round(duration_test, 2)
+        duration_test = round(duration_test, 4)
 
         print(f'Duration Inference: {duration_test} seconds')
 
-        print("Accuracy Testing: %.2f" % error)
+        print("Accuracy Testing: ", error)
         print("")
 
         return duration_test, error
