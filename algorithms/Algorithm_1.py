@@ -7,7 +7,6 @@ from matplotlib import pyplot as plt
 from time import time
 from keras.utils.np_utils import to_categorical
 
-
 class TensorFlow_CNN:
     def __init__(self, train_data, test_data, learning_rate, n_epochs, opt, i):
         self.history = None
