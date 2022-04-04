@@ -9,13 +9,13 @@ from time import time
 
 
 class TensorFlow_ANN:
-    def __init__(self, train_data, test_data, learning_rate, n_epochs, id, opt):
+    def __init__(self, train_data, test_data, learning_rate, n_epochs, opt, i):
         self.history = None
         self.train_data = train_data
         self.test_data = test_data
         self.learning_rate = learning_rate
         self.n_epochs = n_epochs
-        self.id = id
+        self.i = i
         self.opt = opt
         self.model = 0
 
@@ -35,11 +35,18 @@ class TensorFlow_ANN:
         xs_train = xs_train / 255
         xs_val = xs_val / 255
 
+        # # define model architecture
+        # self.model = Sequential()
+        # self.model.add(Flatten(input_shape=(28, 28)))
+        # self.model.add(Dense(256, activation='relu'))
+        # self.model.add(Dense(128, activation='relu'))
+        # self.model.add(Dense(10, activation='softmax'))
+
         # define model architecture
         self.model = Sequential()
         self.model.add(Flatten(input_shape=(28, 28)))
-        self.model.add(Dense(256, activation='relu'))
-        self.model.add(Dense(128, activation='relu'))
+        self.model.add(Dense((self.i*2), activation='relu'))
+        self.model.add(Dense(self.i, activation='relu'))
         self.model.add(Dense(10, activation='softmax'))
 
         # Define Optimizer
@@ -59,7 +66,7 @@ class TensorFlow_ANN:
 
         # Time
         duration_training = end_training - start_training
-        duration_training = round(duration_training, 2)
+        duration_training = round(duration_training, 4)
 
         # Number of Parameter
         trainableParams = np.sum([np.prod(v.get_shape()) for v in self.model.trainable_weights])
@@ -68,15 +75,18 @@ class TensorFlow_ANN:
 
         # Prediction for Training mse
         loss, error = self.model.evaluate(xs_train, ys_train, verbose=0)
-        error = round(error, 2)
+        error *= 100
+        error = round(error, 4)
 
         # Summary
         print('------ TensorFlow - ANN ------')
+        print("Number of Neurons in 1st Hidden-Layer: ", self.i*2)
+        print("Number of Neurons in 2nd Hidden-Layer: ", self.i)
         print(f'Duration Training: {duration_training} seconds')
         print('Accuracy Training: ', error)
         print("Number of Parameter: ", n_params)
 
-        return duration_training, error
+        return duration_training, error, n_params
 
     def test(self):
         # Test Data
@@ -94,12 +104,13 @@ class TensorFlow_ANN:
         # Predict Data
         start_test = time()
         loss, error = self.model.evaluate(xs_test, ys_test, verbose=0)
-        error = round(error, 2)
+        error *= 100
+        error = round(error, 4)
         end_test = time()
 
         # Time
         duration_test = end_test - start_test
-        duration_test = round(duration_test, 2)
+        duration_test = round(duration_test, 4)
 
         print(f'Duration Inference: {duration_test} seconds')
 

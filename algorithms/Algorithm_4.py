@@ -28,14 +28,16 @@ class RandomForest:
 
         # Time
         duration_training = end_training - start_training
-        duration_training = round(duration_training, 2)
+        duration_training = round(duration_training, 4)
 
         # Prediction for Training mse
         error = self.model.score(xs_train, ys_train)
-        error = round(error, 2)
+        error *= 100
+        error = round(error, 4)
 
         # Summary
         print('------ Random Forest ------')
+        print('Number of Estimators: ', self.n_estimators)
         print(f'Duration Training: {duration_training} seconds')
         print('Accuracy Training: ', error)
 
@@ -53,16 +55,17 @@ class RandomForest:
         # Predict Data
         start_test = time()
         error = self.model.score(xs_test, ys_test)
-        error = round(error, 2)
+        error *= 100
+        error = round(error, 4)
         end_test = time()
 
         # Time
         duration_test = end_test - start_test
-        duration_test = round(duration_test, 2)
+        duration_test = round(duration_test, 4)
 
         print(f'Duration Inference: {duration_test} seconds')
 
-        print("Accuracy Testing: %.2f" % error)
+        print("Accuracy Testing:", error)
         print("")
 
         return duration_test, error
