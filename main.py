@@ -15,14 +15,29 @@ def main():
         config = json.load(file)
 
     # Get Parameters from config file
-    Algo1_lr = config["Algorithm 1"]["learning_rate"]
-    Algo1_epochs = config["Algorithm 1"]["n_epochs"]
-    Algo1_opt = config["Algorithm 1"]["opt"]
-    Algo2_lr = config["Algorithm 2"]["learning_rate"]
-    Algo2_epochs = config["Algorithm 2"]["n_epochs"]
-    Algo2_opt = config["Algorithm 2"]["opt"]
-    Algo4_penalty = config["Algorithm 4"]["penalty"]
-    Algo4_solver = config["Algorithm 4"]["solver"]
+    algo1_lr = config["Algorithm 1"]["learning_rate"]
+    algo1_epochs = config["Algorithm 1"]["n_epochs"]
+    algo1_opt = config["Algorithm 1"]["opt"]
+    algo1_min = config["Algorithm 1"]["min"]
+    algo1_max = config["Algorithm 1"]["max"]
+    algo1_step = config["Algorithm 1"]["step"]
+
+    algo2_lr = config["Algorithm 2"]["learning_rate"]
+    algo2_epochs = config["Algorithm 2"]["n_epochs"]
+    algo2_opt = config["Algorithm 2"]["opt"]
+    algo2_min = config["Algorithm 2"]["min"]
+    algo2_max = config["Algorithm 2"]["max"]
+    algo2_step = config["Algorithm 2"]["step"]
+
+    algo3_min = config["Algorithm 3"]["min"]
+    algo3_max = config["Algorithm 3"]["max"]
+    algo3_step = config["Algorithm 3"]["step"]
+
+    algo4_penalty = config["Algorithm 4"]["penalty"]
+    algo4_solver = config["Algorithm 4"]["solver"]
+    algo4_min = config["Algorithm 4"]["min"]
+    algo4_max = config["Algorithm 4"]["max"]
+    algo4_step = config["Algorithm 4"]["step"]
 
     # Get Sample Data
     sampleData = DataProvider.DataProvider()
@@ -34,8 +49,8 @@ def main():
     ConvNN_training = []
     ConvNN_test = []
 
-    for i in range(4, 45, 3):
-        model = Algorithm_1.TensorFlow_CNN(train_data, test_data, Algo1_lr, Algo1_epochs, Algo1_opt, i)
+    for i in range(algo1_min, algo1_max, algo1_step):
+        model = Algorithm_1.TensorFlow_CNN(train_data, test_data, algo1_lr, algo1_epochs, algo1_opt, i)
         duration_train, acc_train, n_params = model.train()
         duration_test, acc_test = model.test()
 
@@ -63,8 +78,8 @@ def main():
     NeuralNetwork_training = []
     NeuralNetwork_test = []
 
-    for i in range(10, 150, 10):
-        model = Algorithm_2.TensorFlow_ANN(train_data, test_data, Algo2_lr, Algo2_epochs, Algo2_opt, i)
+    for i in range(algo2_min, algo2_max, algo2_step):
+        model = Algorithm_2.TensorFlow_ANN(train_data, test_data, algo2_lr, algo2_epochs, algo2_opt, i)
         duration_train, acc_train, n_params = model.train()
         duration_test, acc_test = model.test()
 
@@ -92,7 +107,7 @@ def main():
     randomForest_training = []
     randomForest_test = []
 
-    for i in range(1, 60, 2):
+    for i in range(algo3_min, algo3_max, algo3_step):
         model = Algorithm_4.RandomForest(train_data, test_data, i)
         duration_train, acc_train = model.train()
         duration_test, acc_test = model.test()
@@ -120,8 +135,8 @@ def main():
     Regression_training = []
     Regression_test = []
 
-    for i in range(1, 30, 2):
-        model = Algorithm_3.LogisticRegressionClassifier(train_data, test_data, Algo4_penalty, Algo4_solver, i)
+    for i in range(algo4_min, algo4_max, algo4_step):
+        model = Algorithm_3.LogisticRegressionClassifier(train_data, test_data, algo4_penalty, algo4_solver, i)
         duration_train, acc_train = model.train()
         duration_test, acc_test = model.test()
 
