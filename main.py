@@ -34,7 +34,7 @@ def main():
     ConvNN_training = []
     ConvNN_test = []
 
-    for i in range(4, 35, 3):
+    for i in range(4, 45, 3):
         model = Algorithm_1.TensorFlow_CNN(train_data, test_data, Algo1_lr, Algo1_epochs, Algo1_opt, i)
         duration_train, acc_train, n_params = model.train()
         duration_test, acc_test = model.test()
@@ -63,7 +63,7 @@ def main():
     NeuralNetwork_training = []
     NeuralNetwork_test = []
 
-    for i in range(10, 130, 10):
+    for i in range(10, 150, 10):
         model = Algorithm_2.TensorFlow_ANN(train_data, test_data, Algo2_lr, Algo2_epochs, Algo2_opt, i)
         duration_train, acc_train, n_params = model.train()
         duration_test, acc_test = model.test()
@@ -92,7 +92,7 @@ def main():
     randomForest_training = []
     randomForest_test = []
 
-    for i in range(1, 40, 2):
+    for i in range(1, 60, 2):
         model = Algorithm_4.RandomForest(train_data, test_data, i)
         duration_train, acc_train = model.train()
         duration_test, acc_test = model.test()
@@ -120,7 +120,7 @@ def main():
     Regression_training = []
     Regression_test = []
 
-    for i in range(1, 20, 2):
+    for i in range(1, 30, 2):
         model = Algorithm_3.LogisticRegressionClassifier(train_data, test_data, Algo4_penalty, Algo4_solver, i)
         duration_train, acc_train = model.train()
         duration_test, acc_test = model.test()
