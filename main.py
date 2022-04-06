@@ -164,7 +164,7 @@ def main():
     ax2.plot(Regression_test_df["accuracy"], Regression_test_df["duration"], '-o', c='orange', alpha=0.6, markersize=4)
     ax1.title.set_text('Training')
     ax2.title.set_text('Inference')
-    plt.legend(["Convolutional NN", "Neural Network", "Random Forest", "Logistic Regression"],
+    plt.legend(["CNN", "ANN", "Random Forest", "Logistic Regression"],
                loc='lower center', ncol=4, bbox_transform=fig.transFigure, bbox_to_anchor=(0.5, 0))
     plt.savefig('plots/Algorithms_Evaluation.png', dpi=600)
     plt.clf()
@@ -176,7 +176,7 @@ def main():
     plt.plot(NeuralNetwork_training_df["accuracy"], NeuralNetwork_training_df["parameter"], '-o', c='green', alpha=0.6)
     plt.xlabel('Accuracy [in %]', fontsize=10)
     plt.ylabel('Number of Parameter', fontsize=10)
-    plt.legend(["Convolutional NN", "Neural Network"])
+    plt.legend(["Convolutional Neural Network", "Artificial Neural Network"])
     # plt.yscale('log')
     plt.savefig('plots/Number_of_Parameter.png', dpi=300)
     plt.clf()
