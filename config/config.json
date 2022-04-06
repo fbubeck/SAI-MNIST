@@ -4,7 +4,7 @@
         "n_epochs":5,
         "opt": "Adam",
         "min": 4,
-        "max": 35,
+        "max": 50,
         "step": 3
     },
     "Algorithm 2":{
@@ -12,12 +12,12 @@
         "n_epochs":5,
         "opt": "Adam",
         "min": 10,
-        "max": 150,
+        "max": 180,
         "step": 10
     },
     "Algorithm 3":{
         "min": 1,
-        "max": 60,
+        "max": 70,
         "step": 2
     },
     "Algorithm 4": {
