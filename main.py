@@ -156,6 +156,8 @@ def main():
     ax2.set_ylabel('Duration [in seconds]', fontsize=10)
     ax1.set_xscale('log')
     ax2.set_xscale('log')
+    ax1.set_xlim([70, 100])
+    ax2.set_xlim([70, 100])
     ax1.plot(ConvNN_test_df["accuracy"], ConvNN_training_df["duration"], '-o', c='blue', alpha=0.6, markersize=4)
     ax2.plot(ConvNN_test_df["accuracy"], ConvNN_test_df["duration"], '-o', c='blue', alpha=0.6, markersize=4)
     ax1.plot(NeuralNetwork_test_df["accuracy"], NeuralNetwork_training_df["duration"], '-o', c='green', alpha=0.6, markersize=4)
@@ -173,7 +175,7 @@ def main():
     print("Evaluation Plot saved...")
     print("")
 
-    plt.figure(figsize=(600 * px, 400 * px))
+    plt.figure(figsize=(650 * px, 400 * px))
     plt.plot(ConvNN_training_df["accuracy"], ConvNN_training_df["parameter"], '-o', c='blue', alpha=0.6)
     plt.plot(NeuralNetwork_training_df["accuracy"], NeuralNetwork_training_df["parameter"], '-o', c='green', alpha=0.6)
     plt.xlabel('Accuracy [in %]', fontsize=10)
