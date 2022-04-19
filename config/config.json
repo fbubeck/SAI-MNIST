@@ -3,7 +3,7 @@
         "learning_rate":0.001,
         "n_epochs":5,
         "opt": "Adam",
-        "min": 2,
+        "min": 1,
         "max": 50,
         "step": 3
     },
@@ -11,7 +11,7 @@
         "learning_rate":0.001,
         "n_epochs":5,
         "opt": "Adam",
-        "min": 2,
+        "min": 1,
         "max": 180,
         "step": 10
     },
